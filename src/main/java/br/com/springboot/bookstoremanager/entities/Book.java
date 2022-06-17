@@ -33,10 +33,10 @@ public class Book {
   private String name;
 
   @Column(nullable = false)
-  private Integer page;
+  private Integer pages;
 
   @Column(nullable = false)
-  private Integer chapter;
+  private Integer chapters;
 
   @Column(nullable = false)
   private String isbn;
