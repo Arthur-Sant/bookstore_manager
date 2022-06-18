@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.springboot.bookstoremanager.dtos.BookDTO;
+import br.com.springboot.bookstoremanager.exeptions.BookNotFoundException;
 import br.com.springboot.bookstoremanager.services.FindBookByIdService;
 
 @RestController
@@ -19,7 +20,7 @@ public class FindBookByIdController {
   }
 
   @GetMapping("/api/v1/books/{id}")
-  public BookDTO findBookById(@PathVariable Long id) {
+  public BookDTO findBookById(@PathVariable Long id) throws BookNotFoundException {
     return findBookByIdService.findBydId(id);
   }
 

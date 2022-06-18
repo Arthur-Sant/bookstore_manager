@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.springboot.bookstoremanager.dtos.BookDTO;
 import br.com.springboot.bookstoremanager.entities.Book;
+import br.com.springboot.bookstoremanager.exeptions.BookNotFoundException;
 import br.com.springboot.bookstoremanager.mapper.BookMapper;
 import br.com.springboot.bookstoremanager.repositories.BookRepository;
 
@@ -22,8 +23,9 @@ public class FindBookByIdService {
     this.bookRepository = bookRepository;
   }
 
-  public BookDTO findBydId(Long id){
-    Optional<Book> optionalBook = bookRepository.findById(id);
-    return bookMapper.toDTO(optionalBook.get());
+  public BookDTO findBydId(Long id) throws BookNotFoundException{
+    Book book = bookRepository.findById(id)
+                  .orElseThrow(() -> new BookNotFoundException(id));
+    return bookMapper.toDTO(book);
   }
 }
