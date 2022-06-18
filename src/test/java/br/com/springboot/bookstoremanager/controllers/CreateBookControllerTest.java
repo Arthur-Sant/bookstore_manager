@@ -26,7 +26,7 @@ public class CreateBookControllerTest {
 
   private MockMvc mockMvc;
 
-  // para indicar que ele é um mock, onde vai realizar algumas chamadas
+  // para indicar que ele é um mock, onde vai simular algumas chamadas
   @Mock
   private CreateBookService createBookService;
 
