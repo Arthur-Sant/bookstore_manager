@@ -3,34 +3,40 @@ package br.com.springboot.bookstoremanager.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.springboot.bookstoremanager.dtos.BookDTO;
 import br.com.springboot.bookstoremanager.dtos.MessageResponseDTO;
+import br.com.springboot.bookstoremanager.entities.Book;
+import br.com.springboot.bookstoremanager.mapper.BookMapper;
 import br.com.springboot.bookstoremanager.repositories.BookRepository;
 
 @Service
-public class DeleteBookService {
-  
+public class UpdateBookService {
   private BookRepository bookRepository;
 
+  private BookMapper bookMapper = BookMapper.INSTANCE;
+
   @Autowired
-  public DeleteBookService(BookRepository bookRepository) {
+  public UpdateBookService(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
   }
 
-  public MessageResponseDTO delete(Long id){
+  public MessageResponseDTO update(Long id, BookDTO bookDTO) {
 
-    if( bookRepository.existsById(id) ) {
-      bookRepository.deleteById(id);
+    Book book = bookMapper.toModel(bookDTO);
+    
+    if (bookRepository.existsById(id)) {
+      
+      bookRepository.save(book);
 
       return MessageResponseDTO
               .builder()
-              .message("Book deleted successfully")
+              .message("Book updated successfully")
               .build();
     }
-    
+
     return MessageResponseDTO
             .builder()
             .message("there is no book with that id: "+ id)
             .build();
-
   }
 }

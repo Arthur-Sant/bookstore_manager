@@ -1,5 +1,7 @@
 package br.com.springboot.bookstoremanager.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +16,7 @@ public interface BookMapper {
   Book toModel(BookDTO bookDTO);
 
   BookDTO toDTO(Book book);
+
+  List<BookDTO> toDTOList(List<Book> bookList);
 
 }
